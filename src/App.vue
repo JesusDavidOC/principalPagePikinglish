@@ -1,15 +1,25 @@
 <template>
   <div class="body">
     <div id="header" class="container-fluid">
-      <!-- Top bar -->
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="row" id="fixed-top-colapse">
           <div class="col-6" id="logo-area">
-            <!-- Company Icon-->
             <img id="logo" src="/custompages/images/logo.png" />
           </div>
+          <div class="col-6" id="botontoggle">
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarToggler"
+              aria-controls="navbarToggler"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
         </div>
-
         <div class="col-md-8">
           <div class="row">
             <div class="col-lg-10">
@@ -17,26 +27,27 @@
                 <ul class="navbar-nav mt-2 mt-lg-0 col-md-12">
                   <div id="itemsNavBar" class="col-sm-4">
                     <li class="nav-item">
-                      <a class="nav-link" href="https://pikinglish.com"
-                        >SITIO WEB</a
-                      >
+                      <a class="nav-link" href="https://pikinglish.com">SITIO WEB</a>
                     </li>
                   </div>
-                  <!-- Vertical line -->
                   <div class="vertical-line"></div>
                   <div id="itemsNavBar" class="col-sm-4">
                     <li class="nav-item">
                       <a
                         class="nav-link"
-                        href="https://classroom.pikinglish.com/"
-                        >INGRESAR</a
-                      >
+                        href="https://classroom.pikinglish.com/main/auth/inscription.php?language=spanish"
+                      >REGISTRATE</a>
+                    </li>
+                  </div>
+
+                  <div id="itemsNavBarBoton" class="col-sm-4">
+                    <li class="nav-item">
+                      <button id="botonAcceso" class="ripple" v-on:click="animacion()">ACCESO</button>
                     </li>
                   </div>
                 </ul>
               </div>
             </div>
-            <!-- Social media icons -->
             <div class="col-lg-2 row" id="iconoSocial">
               <div class="col-xs-3">
                 <a href="https://www.facebook.com/Pikinglishcolombia/">
@@ -67,128 +78,53 @@
         </div>
       </nav>
     </div>
-
-    <!-- Main content -->
     <div id="app">
       <div class="row" id="contenidos">
-        <!-- Presentation -->
-        <div id="contenidoTexto" class="col-md-12" style="margin: 0">
-          <div class="col-sm-1"></div>
+        
+        <div id="contenidoTexto" class="col-md-12" style="margin: 0;">
+        <div class="col-sm-1"></div>
           <div id="textoIntroTitulo" class="container-sm">
-            <span style="text-shadow: 1em black"
-              >¡ESTÁS A UN PASO DE APRENDER INGLÉS CON LOS MEJORES
-              MAESTROS!</span
-            >
+            <span style="text-shadow: 1em black;">APRENDE INGLES DE MANERA LÓGICA</span>
           </div>
         </div>
-
-        <!-- Registration Form -->
-        <div class="row" id="contenidoRegister">
-          <div class="col-md-12">
-            <b-form @submit="onSubmit" v-if="show">
-              <!-- Name field -->
-              <b-form-group
-                id="input-group"
-                label="Nombre:"
-                label-for="input-1"
-                description="Proporciona tu nombre completo."
-              >
-                <b-form-input
-                  id="input-1"
-                  v-model="form.name"
-                  required
-                  placeholder="Ingresa tu nombre"
-                ></b-form-input>
-              </b-form-group>
-
-              <!-- surName field -->
-              <b-form-group
-                id="input-group"
-                label="Tu apellido:"
-                label-for="input-2"
-              >
-                <b-form-input
-                  id="input-2"
-                  v-model="form.surName"
-                  required
-                  placeholder="Ingresa tu apellido"
-                ></b-form-input>
-              </b-form-group>
-
-              <!-- email fielddd -->
-              <b-form-group
-                id="input-group"
-                label="Tu correo:"
-                label-for="input-3"
-              >
-                <b-form-input
-                  id="input-3"
-                  v-model="form.email"
-                  required
-                  placeholder="Ingresa tu email"
-                ></b-form-input>
-              </b-form-group>
-
-              <!-- password field -->
-              <b-form-group
-                id="input-group"
-                label="Tu contraseña:"
-                label-for="input-4"
-              >
-                <b-form-input
-                  id="input-4"
-                  type="password"
-                  v-model="form.password"
-                  required
-                  placeholder="Ingresa tu contraseña"
-                ></b-form-input>
-              </b-form-group>
-
-              <!-- confirm password field -->
-              <b-form-group
-                id="input-group"
-                label="Repite tu contraseña:"
-                label-for="input-5"
-              >
-                <b-form-input
-                  id="input-5"
-                  type="password"
-                  v-model="form.confpassword"
-                  required
-                  placeholder="Ingresa tu contraseña nuevamente"
-                ></b-form-input>
-              </b-form-group>
-
-              <b-button type="submit" variant="primary">Submit</b-button>
-            </b-form>
-            <b-card class="mt-3" header="Form Data Result">
-              <pre class="m-0">{{ form }}</pre>
-            </b-card>
+      </div>
+      <div id="contenerdorTextoPresentacion" class="row">
+        <div id="textoIntroT" class="col-md-5 row" style="padding:0;">          
+          <div id="contenidoLogin" class="col-md-11" v-if="vue.login">
+            <SignIn />
+          </div>
+          <div class="col-md-12" v-if="!vue.login" style="padding:0;">
+          <infoSliders :numero="this.vue.numSlider"  />
           </div>
         </div>
+        <div class="col-md-1"></div>
+        <div id="textoIntroI" class="col-md-6">
+          <Sliders @numSlider="vue.numSlider = $event" />
+        </div>
+      </div>
+      <div class="row" id="testimonios">
+        <div class="col-md-2"></div>
+
+        <div class="col-md-8">
+          <Testimonios />
+        </div>
+
+        <div class="col-md-1"></div>
       </div>
     </div>
     <footer>
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-6" id="contenidos-footer">
-            <div class="row"><h4 id="agrwi">agreement with</h4></div>
+            <div class="row"> <h4 id="agrwi">agreement with</h4> </div>
             <div class="row">
               <div class="col-sm-2"></div>
-              <div class="col-sm-3">
-                <img
-                  id="logoPa"
-                  src="/custompages/footer/americanLand.jpg"
-                  alt="americanLand"
-                />
+              <div class="col-sm-3" >
+                <img id="logoPa" src="/custompages/footer/americanLand.jpg" alt="americanLand">
               </div>
               <div class="col-sm-2"></div>
               <div class="col-sm-3" id="logoPa">
-                <img
-                  id="logoPa"
-                  src="/custompages/footer/Umas.png"
-                  alt="Umas"
-                />
+                <img id="logoPa" src="/custompages/footer/Umas.png" alt="Umas">
               </div>
             </div>
           </div>
@@ -213,14 +149,6 @@ export default {
         login: false,
         numSlider: 0,
       },
-      form: {
-        name: "",
-        surName: "",
-        email: "",
-        password: "",
-        confpassword: "",
-      },
-      show: true,
     };
   },
   components: {
@@ -240,10 +168,6 @@ export default {
     setLogin(k) {
       console.log(k + "ey ");
       this.vue.login = k;
-    },
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
     },
   },
 };
@@ -266,7 +190,7 @@ export default {
   /**background:  rgb(234,84,72);**/
 }
 
-#agrwi {
+#agrwi{
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 0;
@@ -313,15 +237,6 @@ export default {
   padding-top: 2em;
   padding-bottom: 2em;
 }
-
-#contenidoRegister {
-  font-weight: 600;
-  width: 100%;
-  margin-left: 20em;
-  margin-right: 20em;
-  padding-top: 2em;
-  padding-bottom: 2em;
-}
 #testimonios {
   margin: auto;
 }
@@ -331,6 +246,7 @@ export default {
 
 #logoPa {
   height: 3em;
+  
 }
 
 .vertical-line {
@@ -354,10 +270,11 @@ export default {
   margin: auto;
 }
 
-#textoIntroTitulo {
-  color: rgb(15, 103, 177);
-  font-family: "Inder";
+#textoIntroTitulo {  
+  color:rgb(15, 103, 177);
+  font-family: 'Inder';
   font-size: 3.5em;
+  
 }
 
 #logo-area {
@@ -398,10 +315,6 @@ export default {
 
 #fixed-top-colapse {
   width: 100%;
-}
-
-#input-group{
-  text-align:left
 }
 
 @media screen and (max-width: 990px) {
