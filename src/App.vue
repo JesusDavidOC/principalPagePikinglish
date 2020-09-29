@@ -115,7 +115,7 @@
                 ></b-form-input>
               </b-form-group>
 
-              <!-- email field -->
+              <!-- email fieldd -->
               <b-form-group
                 id="input-group"
                 label="Tu correo:"
