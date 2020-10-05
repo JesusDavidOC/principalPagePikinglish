@@ -83,9 +83,9 @@
         </div>
 
         <!-- Registration Form -->
-        <div class="row" id="contenidoRegister">
+        <div class="row" id="contenidoRegister" >
           <div class="col-md-12">
-            <b-form @submit="onSubmit" v-if="show">
+            <b-form id="registration" name="registration" v-if="show" action="/main/auth/inscription.php" method="post">
               <!-- Name field -->
               <b-form-group
                 id="input-group"
@@ -94,8 +94,9 @@
                 description="Proporciona tu nombre completo."
               >
                 <b-form-input
-                  id="input-1"
+                  id="registration_firstname"
                   v-model="form.name"
+                  name="firstname"
                   required
                   placeholder="Ingresa tu nombre"
                 ></b-form-input>
@@ -108,9 +109,10 @@
                 label-for="input-2"
               >
                 <b-form-input
-                  id="input-2"
+                  id="registration_lastname"
                   v-model="form.surName"
                   required
+                  name="lastname"
                   placeholder="Ingresa tu apellido"
                 ></b-form-input>
               </b-form-group>
@@ -122,9 +124,10 @@
                 label-for="input-3"
               >
                 <b-form-input
-                  id="input-3"
+                  id="registration_email"
                   v-model="form.email"
                   required
+                  name="email"
                   placeholder="Ingresa tu email"
                 ></b-form-input>
               </b-form-group>
@@ -136,10 +139,11 @@
                 label-for="input-4"
               >
                 <b-form-input
-                  id="input-4"
+                  id="pass1"
                   type="password"
                   v-model="form.password"
                   required
+                  name="pass1"
                   placeholder="Ingresa tu contraseña"
                 ></b-form-input>
               </b-form-group>
@@ -151,19 +155,17 @@
                 label-for="input-5"
               >
                 <b-form-input
-                  id="input-5"
+                  id="pass2"
                   type="password"
                   v-model="form.confpassword"
                   required
+                  name="pass2"
                   placeholder="Ingresa tu contraseña nuevamente"
                 ></b-form-input>
               </b-form-group>
 
-              <b-button type="submit" variant="primary">Submit</b-button>
+              <b-button type="submit" id="registration_submit" name="submit" variant="primary">Submit</b-button>
             </b-form>
-            <b-card class="mt-3" header="Form Data Result">
-              <pre class="m-0">{{ form }}</pre>
-            </b-card>
           </div>
         </div>
       </div>
@@ -177,7 +179,7 @@
               <div class="col-sm-2"></div>
               <div class="col-sm-3">
                 <img
-                  id="logoPa"
+                  id="logo"
                   src="/custompages/footer/americanLand.jpg"
                   alt="americanLand"
                 />
@@ -185,7 +187,7 @@
               <div class="col-sm-2"></div>
               <div class="col-sm-3" id="logoPa">
                 <img
-                  id="logoPa"
+                  id="logo"
                   src="/custompages/footer/Umas.png"
                   alt="Umas"
                 />
@@ -199,6 +201,7 @@
     </footer>
   </div>
 </template>
+
 
 <script>
 import SignIn from "./components/SignIn";
@@ -241,10 +244,6 @@ export default {
       console.log(k + "ey ");
       this.vue.login = k;
     },
-    onSubmit(evt) {
-      evt.preventDefault();
-      alert(JSON.stringify(this.form));
-    },
   },
 };
 </script>
@@ -277,9 +276,7 @@ export default {
 }
 
 #logo {
-  height: 100px;
-  padding-top: 0;
-  padding-bottom: 0;
+  width: 100px; height: 100px;
 }
 
 .body {
@@ -400,8 +397,8 @@ export default {
   width: 100%;
 }
 
-#input-group{
-  text-align:left
+#input-group {
+  text-align: left;
 }
 
 @media screen and (max-width: 990px) {
